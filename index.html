@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>StatikSayt.uz | Tez va Arzon Veb-Saytlar</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050508;
+            color: #ffffff;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        /* Animated Background Grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 200, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 200, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+            transform: translateZ(0);
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        /* Glowing Orbs */
+        .orb {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatOrb 15s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+
+        .orb-1 {
+            background: #00ffcc;
+            top: -100px;
+            right: -100px;
+        }
+
+        .orb-2 {
+            background: #7b2cbf;
+            bottom: -100px;
+            left: -100px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            background: #ff006e;
+            top: 40%;
+            left: 60%;
+            width: 300px;
+            height: 300px;
+            animation-delay: -10s;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-30px, 30px) scale(1.2); }
+        }
+
+        /* Main Content Wrapper */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: all 0.4s ease;
+            box-sizing: border-box;
+        }
+
+        header.scrolled {
+            background: rgba(5, 5, 8, 0.85);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(0, 255, 204, 0.1);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 0%, #00ffcc 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: #00ffcc;
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 32px;
+            font-weight: 500;
+        }
+
+        @media (min-width: 992px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: #00ffcc;
+        }
+
+        .header-btn {
+            display: none;
+            background: rgba(0, 255, 204, 0.1);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            padding: 10px 22px;
+            border-radius: 100px;
+            color: #00ffcc;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+        }
+
+        @media (min-width: 768px) {
+            .header-btn {
+                display: inline-block;
+            }
+        }
+
+        .header-btn:hover {
+            background: #00ffcc;
+            color: #050508;
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);
+        }
+
+        .mobile-menu-btn {
+            display: block;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 26px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        @media (min-width: 992px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 40px;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                padding: 120px 0 60px;
+            }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            align-items: center;
+            width: 100%;
+        }
+
+        @media (min-width: 992px) {
+            .hero-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 50px;
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 255, 204, 0.1);
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #00ffcc;
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease;
+            white-space: nowrap;
+        }
+
+        .hero-title {
+            font-size: 38px;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease 0.1s both;
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 52px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .hero-title {
+                font-size: 64px;
+            }
+        }
+
+        .hero-title span {
+            color: #00ffcc;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: rgba(0, 255, 204, 0.2);
+            z-index: -1;
+        }
+
+        .hero-desc {
+            font-size: 16px;
+            color: #b0b0c0;
+            margin-bottom: 30px;
+            max-width: 500px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        @media (min-width: 768px) {
+            .hero-desc {
+                font-size: 18px;
+            }
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .btn-primary {
+            background: #00ffcc;
+            color: #050508;
+            padding: 14px 28px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2);
+            white-space: nowrap;
+        }
+
+        @media (min-width: 768px) {
+            .btn-primary {
+                padding: 18px 38px;
+                font-size: 18px;
+            }
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 255, 204, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+        }
+
+        @media (min-width: 768px) {
+            .btn-secondary {
+                padding: 18px 38px;
+                font-size: 18px;
+            }
+        }
+
+        .btn-secondary:hover {
+            border-color: #00ffcc;
+            color: #00ffcc;
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            animation: fadeInRight 1s ease 0.3s both;
+            width: 100%;
+        }
+
+        .stats-card {
+            background: rgba(20, 20, 30, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            border-radius: 28px;
+            padding: 24px;
+            transform: perspective(1000px) rotateY(-3deg) rotateX(3deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .stats-card {
+                border-radius: 32px;
+                padding: 32px;
+                transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            }
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #00ffcc;
+        }
+
+        @media (min-width: 768px) {
+            .stat-value {
+                font-size: 36px;
+            }
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #8888aa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (min-width: 768px) {
+            .stat-label {
+                font-size: 13px;
+            }
+        }
+
+        .code-preview {
+            background: #0a0a0f;
+            border-radius: 12px;
+            padding: 16px;
+            font-family: 'Courier New', monospace;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        @media (min-width: 768px) {
+            .code-preview {
+                border-radius: 16px;
+                padding: 20px;
+            }
+        }
+
+        .code-line {
+            display: flex;
+            margin-bottom: 6px;
+            font-size: 11px;
+        }
+
+        @media (min-width: 768px) {
+            .code-line {
+                font-size: 13px;
+                margin-bottom: 8px;
+            }
+        }
+
+        .code-line .tag {
+            color: #ff79c6;
+            width: 55px;
+            flex-shrink: 0;
+        }
+
+        .code-line .content {
+            color: #f8f8f2;
+        }
+
+        .code-line .comment {
+            color: #6272a4;
+        }
+
+        /* Floating Elements */
+        .floating-badge {
+            display: none;
+            position: absolute;
+            background: rgba(0, 255, 204, 0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            border-radius: 100px;
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #00ffcc;
+            animation: float 4s ease-in-out infinite;
+            white-space: nowrap;
+        }
+
+        @media (min-width: 768px) {
+            .floating-badge {
+                display: block;
+            }
+        }
+
+        .badge-1 {
+            top: 5%;
+            right: -20px;
+        }
+
+        .badge-2 {
+            bottom: 15%;
+            left: -30px;
+            animation-delay: 1s;
+        }
+
+        .badge-3 {
+            top: 45%;
+            right: -15px;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 60px 0;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .services {
+                padding: 100px 0;
+            }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .section-header {
+                margin-bottom: 60px;
+            }
+        }
+
+        .section-subtitle {
+            color: #00ffcc;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 44px;
+            }
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+        }
+
+        .service-card {
+            background: rgba(20, 20, 30, 0.5);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 32px;
+            padding: 30px 24px;
+            transition: all 0.4s;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 255, 204, 0.3);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 255, 204, 0.1);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 26px;
+            color: #00ffcc;
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: #a0a0b0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Portfolio - Enhanced with Images */
+        .portfolio {
+            padding: 60px 0;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .portfolio {
+                padding: 80px 0;
+            }
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+        }
+
+        .portfolio-card {
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 32px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 100%;
+            position: relative;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(0, 255, 204, 0.4);
+            box-shadow: 0 30px 60px rgba(0, 255, 204, 0.15);
+        }
+
+        .portfolio-image {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .portfolio-card:hover .portfolio-image img {
+            transform: scale(1.05);
+        }
+
+        /* .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(5, 5, 8, 0.7) 60%,
+                rgba(5, 5, 8, 0.95) 100%
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .portfolio-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 40%,
+                rgba(5, 5, 8, 0.3) 100%
+            );
+            pointer-events: none;
+        } */
+
+        .portfolio-badge-top {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 255, 204, 0.9);
+            color: #050508;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .portfolio-category-badge {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #00ffcc;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 2;
+            border: 1px solid rgba(0, 255, 204, 0.3);
+        }
+
+        .portfolio-content {
+            padding: 24px;
+        }
+
+        .portfolio-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .portfolio-title h3 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .portfolio-badge-new {
+            background: rgba(0, 255, 204, 0.15);
+            color: #00ffcc;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            border: 1px solid rgba(0, 255, 204, 0.3);
+        }
+
+        .portfolio-category {
+            color: #00ffcc;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .portfolio-description {
+            color: #a0a0b0;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .portfolio-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            color: #8888aa;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .portfolio-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-preview {
+            background: rgba(0, 255, 204, 0.1);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            color: #00ffcc;
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-preview:hover {
+            background: #00ffcc;
+            color: #050508;
+        }
+
+        .btn-order {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-order:hover {
+            border-color: rgba(0, 255, 204, 0.5);
+            background: rgba(0, 255, 204, 0.1);
+            color: #00ffcc;
+        }
+
+        .btn-order i {
+            color: #00ffcc;
+        }
+
+        @media (max-width: 480px) {
+            .portfolio-content {
+                padding: 20px 16px;
+            }
+            
+            .portfolio-title h3 {
+                font-size: 20px;
+            }
+            
+            .portfolio-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .btn-preview, .btn-order {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .portfolio-badge-top {
+                top: 12px;
+                right: 12px;
+                padding: 4px 10px;
+                font-size: 10px;
+            }
+            
+            .portfolio-category-badge {
+                bottom: 12px;
+                left: 12px;
+                padding: 4px 10px;
+                font-size: 10px;
+            }
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 60px 0;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .pricing {
+                padding: 100px 0;
+            }
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+        }
+
+        .pricing-card {
+            background: rgba(20, 20, 30, 0.5);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 32px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            width: 100%;
+        }
+
+        .pricing-card.featured {
+            border-color: #00ffcc;
+            box-shadow: 0 0 40px rgba(0, 255, 204, 0.1);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #00ffcc;
+            color: #050508;
+            padding: 5px 18px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .pricing-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .price {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 20px 0 16px;
+        }
+
+        .price span {
+            font-size: 16px;
+            font-weight: 400;
+            color: #8888aa;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 28px 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 8px 0;
+            color: #b0b0c0;
+            font-size: 14px;
+        }
+
+        .pricing-features i {
+            color: #00ffcc;
+            margin-right: 10px;
+            width: 18px;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 60px 0;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .cta-section {
+                padding: 100px 0;
+            }
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(0, 255, 204, 0.1) 0%, rgba(123, 44, 191, 0.1) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            border-radius: 40px;
+            padding: 40px 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .cta-box {
+                border-radius: 60px;
+                padding: 60px 40px;
+            }
+        }
+
+        .cta-box h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 768px) {
+            .cta-box h2 {
+                font-size: 40px;
+            }
+        }
+
+        .cta-box p {
+            font-size: 15px;
+            color: #b0b0c0;
+            margin-bottom: 28px;
+        }
+
+        @media (min-width: 768px) {
+            .cta-box p {
+                font-size: 18px;
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #00ffcc;
+            color: #050508;
+            padding: 16px 24px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2);
+            max-width: 100%;
+            width: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            box-sizing: border-box;
+        }
+
+        .cta-button i {
+            margin-right: 8px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 255, 204, 0.3);
+        }
+
+        @media (max-width: 480px) {
+            .cta-button {
+                display: block;
+                width: 100%;
+                white-space: normal;
+                padding: 16px 16px;
+                font-size: 15px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .cta-button {
+                padding: 18px 40px;
+                font-size: 18px;
+            }
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            text-align: center;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                text-align: left;
+            }
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-links {
+                gap: 36px;
+            }
+        }
+
+        .footer-links a {
+            color: #8888aa;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .footer-links a:hover {
+            color: #00ffcc;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: #8888aa;
+            font-size: 22px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #00ffcc;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            margin-top: 28px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cursor, .cursor-dot {
+                display: none !important;
+            }
+            
+            .bg-grid {
+                background-size: 30px 30px;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0f;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #00ffcc;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="content-wrapper">
+        <!-- Header -->
+        <header id="header">
+            <div class="container">
+                <div class="header-inner">
+                    <div class="logo">Saytchi<span>.vercel</span>.app</div>
+                    <div class="nav-links">
+                        <a href="#services">Xizmatlar</a>
+                        <a href="#portfolio">Portfolio</a>
+                        <a href="#pricing">Narxlar</a>
+                        <a href="#contact">Bog'lanish</a>
+                    </div>
+                    <a href="#" class="header-btn" onclick="orderGeneral(); return false;">Buyurtma berish</a>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <div class="hero-badge">
+                            <i class="fas fa-bolt"></i> 24 SOATDA TAYYOR
+                        </div>
+                        <h1 class="hero-title">
+                            Biznesingiz uchun <span>tez</span> va <span>arzon</span> veb-saytlar
+                        </h1>
+                        <p class="hero-desc">
+                            Backendsiz, hosting to'lovisiz. Faqat HTML, CSS va JavaScript. 
+                            GitHub Pages'da bepul joylashtiramiz. Siz faqat biznesingiz bilan shug'ullaning.
+                        </p>
+                        <div class="hero-cta">
+                            <a href="#pricing" class="btn-primary">Narxlarni ko'rish →</a>
+                            <a href="#portfolio" class="btn-secondary">Portfolio</a>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="stats-card">
+                            <div class="stats-row">
+                                <div class="stat-item">
+                                    <div class="stat-value">0₩</div>
+                                    <div class="stat-label">OYLIK TO'LOV</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">100%</div>
+                                    <div class="stat-label">MOSLASHUVCHAN</div>
+                                </div>
+                            </div>
+                            <div class="code-preview">
+                                <div class="code-line">
+                                    <span class="tag">&lt;html&gt;</span>
+                                    <span class="content"></span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="tag">&lt;body&gt;</span>
+                                    <span class="content"></span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="tag"></span>
+                                    <span class="content">  &lt;h1&gt;Biznesingiz&lt;/h1&gt;</span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="tag"></span>
+                                    <span class="content">  &lt;p&gt;24/7 ishlaydi&lt;/p&gt;</span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="tag">&lt;/body&gt;</span>
+                                    <span class="content"></span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="tag">&lt;/html&gt;</span>
+                                    <span class="content"></span>
+                                    <span class="comment">// oddiy va kuchli</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="floating-badge badge-1">
+                            <i class="fas fa-mobile-alt"></i> Mobile First
+                        </div>
+                        <div class="floating-badge badge-2">
+                            <i class="fas fa-rocket"></i> 98/100 PageSpeed
+                        </div>
+                        <div class="floating-badge badge-3">
+                            <i class="fas fa-shield-alt"></i> 100% Xavfsiz
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section id="services" class="services">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-subtitle">NIMALAR QILA OLAMAN</div>
+                    <h2 class="section-title">Sizga kerakli hamma narsa</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3>Biznes Saytlar</h3>
+                        <p>Kichik biznes, do'kon, kafe yoki xizmat ko'rsatish uchun zamonaviy landing page.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Portfolio Saytlar</h3>
+                        <p>O'z ishlaringizni ko'rsatish uchun kreativ va minimalist portfolio.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <h3>Blog / Yangiliklar</h3>
+                        <p>Statik sayt generatorlari yordamida tez va xavfsiz blog yaratish.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio -->
+        <section id="portfolio" class="portfolio">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-subtitle">OXIRGI ISHLAR</div>
+                    <h2 class="section-title">Har bir loyiha — san'at asari</h2>
+                </div>
+                <div class="portfolio-grid">
+                    
+                    <!-- 1. Coffee House -->
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=2560&h=1440&dpr=2" 
+                                 alt="Coffee House Toshkent" 
+                                 loading="lazy">
+                            <div class="portfolio-overlay"></div>
+                            <span class="portfolio-badge-top">🔥 YANGI</span>
+                            <span class="portfolio-category-badge">
+                                <i class="fas fa-mug-hot"></i> Landing Page
+                            </span>
+                        </div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">
+                                <h3>Coffee House Toshkent</h3>
+                                <span class="portfolio-badge-new">2026</span>
+                            </div>
+                            <p class="portfolio-description">
+                                Premium qahvaxona uchun to'liq moslashuvchan landing page. 
+                                Online buyurtma, menyu va lokatsiya bilan.
+                            </p>
+                            <div class="portfolio-tech">
+                                <span class="tech-tag">HTML5</span>
+                                <span class="tech-tag">CSS3</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Mobile First</span>
+                            </div>
+                            <div class="portfolio-actions">
+                                <a href="#" class="btn-preview" target="_blank">
+                                    <i class="fas fa-eye"></i> Jonli ko'rish
+                                </a>
+                                <a href="#" class="btn-order" onclick="orderPortfolio('Coffee House Toshkent', 'Landing Page', '1 500 000'); return false;">
+                                    <i class="fab fa-telegram"></i> Buyurtma berish
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. DevPortfolio -->
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=2560&h=1440&dpr=2" 
+                                 alt="DevPortfolio" 
+                                 loading="lazy">
+                            <div class="portfolio-overlay"></div>
+                            <span class="portfolio-badge-top">⭐ PREMIUM</span>
+                            <span class="portfolio-category-badge">
+                                <i class="fas fa-code"></i> Portfolio
+                            </span>
+                        </div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">
+                                <h3>DevPortfolio</h3>
+                                <span class="portfolio-badge-new">2026</span>
+                            </div>
+                            <p class="portfolio-description">
+                                Dasturchilar uchun zamonaviy portfolio sayti. 
+                                Loyihalar, ko'nikmalar va kontakt ma'lumotlari bilan.
+                            </p>
+                            <div class="portfolio-tech">
+                                <span class="tech-tag">HTML5</span>
+                                <span class="tech-tag">Tailwind</span>
+                                <span class="tech-tag">GSAP</span>
+                                <span class="tech-tag">AOS</span>
+                            </div>
+                            <div class="portfolio-actions">
+                                <a href="#" class="btn-preview" target="_blank">
+                                    <i class="fas fa-eye"></i> Jonli ko'rish
+                                </a>
+                                <a href="#" class="btn-order" onclick="orderPortfolio('DevPortfolio', 'Shaxsiy Portfolio', '1 500 000'); return false;">
+                                    <i class="fab fa-telegram"></i> Buyurtma berish
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Stomatologiya -->
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="https://images.pexels.com/photos/3845653/pexels-photo-3845653.jpeg?auto=compress&cs=tinysrgb&w=2560&h=1440&dpr=2" 
+                                 alt="Stomatologiya Markazi" 
+                                 loading="lazy">
+                            <div class="portfolio-overlay"></div>
+                            <span class="portfolio-badge-top">🏆 TOP</span>
+                            <span class="portfolio-category-badge">
+                                <i class="fas fa-clinic-medical"></i> Korporativ
+                            </span>
+                        </div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">
+                                <h3>DentCare Stomatologiya</h3>
+                                <span class="portfolio-badge-new">2025</span>
+                            </div>
+                            <p class="portfolio-description">
+                                Zamonaviy stomatologiya klinikasi uchun to'liq sayt. 
+                                Xizmatlar, shifokorlar va onlayn qabulga yozilish.
+                            </p>
+                            <div class="portfolio-tech">
+                                <span class="tech-tag">HTML5</span>
+                                <span class="tech-tag">SCSS</span>
+                                <span class="tech-tag">Swiper.js</span>
+                                <span class="tech-tag">Formspree</span>
+                            </div>
+                            <div class="portfolio-actions">
+                                <a href="#" class="btn-preview" target="_blank">
+                                    <i class="fas fa-eye"></i> Jonli ko'rish
+                                </a>
+                                <a href="#" class="btn-order" onclick="orderPortfolio('DentCare Stomatologiya', 'Korporativ Sayt', '2 800 000'); return false;">
+                                    <i class="fab fa-telegram"></i> Buyurtma berish
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Fitness Club -->
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=2560&h=1440&dpr=2" 
+                                 alt="Fitness Club" 
+                                 loading="lazy">
+                            <div class="portfolio-overlay"></div>
+                            <span class="portfolio-badge-top">💪 HIT</span>
+                            <span class="portfolio-category-badge">
+                                <i class="fas fa-dumbbell"></i> Landing Page
+                            </span>
+                        </div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">
+                                <h3>PowerFit Fitness Club</h3>
+                                <span class="portfolio-badge-new">2025</span>
+                            </div>
+                            <p class="portfolio-description">
+                                Premium fitness klub uchun motivatsion landing page.
+                                A'zolik paketlari, trenerlar va onlayn ro'yxatdan o'tish.
+                            </p>
+                            <div class="portfolio-tech">
+                                <span class="tech-tag">HTML5</span>
+                                <span class="tech-tag">CSS Grid</span>
+                                <span class="tech-tag">CountUp.js</span>
+                                <span class="tech-tag">Fancybox</span>
+                            </div>
+                            <div class="portfolio-actions">
+                                <a href="#" class="btn-preview" target="_blank">
+                                    <i class="fas fa-eye"></i> Jonli ko'rish
+                                </a>
+                                <a href="#" class="btn-order" onclick="orderPortfolio('PowerFit Fitness Club', 'Landing Page', '1 500 000'); return false;">
+                                    <i class="fab fa-telegram"></i> Buyurtma berish
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section id="pricing" class="pricing">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-subtitle">NARXLAR</div>
+                    <h2 class="section-title">Oddiy va tushunarli</h2>
+                </div>
+                <div class="pricing-grid">
+                    <!-- Landing Page -->
+                    <div class="pricing-card">
+                        <h3>Landing Page</h3>
+                        <div class="price">1 500 000 <span>so'm</span></div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 1 sahifali sayt</li>
+                            <li><i class="fas fa-check"></i> Mobil versiya</li>
+                            <li><i class="fas fa-check"></i> Kontakt formasi</li>
+                            <li><i class="fas fa-check"></i> 3 kun ichida tayyor</li>
+                            <li><i class="fas fa-check"></i> Bepul hosting</li>
+                        </ul>
+                        <a href="#" class="btn-secondary btn-block" onclick="orderPricing('Landing Page', '1 500 000'); return false;">Tanlash</a>
+                    </div>
+                    <!-- Biznes Sayt -->
+                    <div class="pricing-card featured">
+                        <div class="popular-badge">ENG OMMABOP</div>
+                        <h3>Biznes Sayt</h3>
+                        <div class="price">2 800 000 <span>so'm</span></div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 5 tagacha sahifa</li>
+                            <li><i class="fas fa-check"></i> Mobil versiya</li>
+                            <li><i class="fas fa-check"></i> Kontakt formasi</li>
+                            <li><i class="fas fa-check"></i> Galereya / Portfolio</li>
+                            <li><i class="fas fa-check"></i> 5 kun ichida tayyor</li>
+                            <li><i class="fas fa-check"></i> Bepul hosting + domen</li>
+                        </ul>
+                        <a href="#" class="btn-primary btn-block" onclick="orderPricing('Biznes Sayt', '2 800 000'); return false;">Buyurtma berish</a>
+                    </div>
+                    <!-- Maxsus Loyiha -->
+                    <div class="pricing-card">
+                        <h3>Maxsus Loyiha</h3>
+                        <div class="price">Kelishiladi</div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Cheksiz sahifa</li>
+                            <li><i class="fas fa-check"></i> Murakkab animatsiyalar</li>
+                            <li><i class="fas fa-check"></i> Admin panel</li>
+                            <li><i class="fas fa-check"></i> SEO optimizatsiya</li>
+                            <li><i class="fas fa-check"></i> Muddati kelishiladi</li>
+                            <li><i class="fas fa-check"></i> To'liq qo'llab-quvvatlash</li>
+                        </ul>
+                        <a href="#" class="btn-secondary btn-block" onclick="orderPricing('Maxsus Loyiha', 'Kelishiladi'); return false;">Bog'lanish</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <div class="cta-box">
+                    <h2>Biznesingizni internetga olib chiqish vaqti keldi</h2>
+                    <p>Hoziroq yozing. Bepul konsultatsiya va sayt dizayni taqdimotini tayyorlab beramiz.</p>
+                    <a href="#" class="cta-button" onclick="orderGeneral(); return false;">
+                        <i class="fab fa-telegram"></i> Telegram orqali bog'lanish
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="logo">Saytchi<span>.vercel</span>.app</div>
+                    <div class="footer-links">
+                        <a href="#services">Xizmatlar</a>
+                        <a href="#portfolio">Portfolio</a>
+                        <a href="#pricing">Narxlar</a>
+                        <a href="#">Shartlar</a>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://t.me/Musoxon2002" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="https://www.instagram.com/sayt.chi/?utm_source=ig_web_button_share_sheet"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/musoxon-pro"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    © 2026 StatikSayt.uz — Barcha huquqlar himoyalangan. Backendsiz, hosting to'lovisiz.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        (function() {
+            "use strict";
+            
+            // Header Scroll Effect
+            const header = document.getElementById('header');
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            }
+
+            // Smooth Scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href && href !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                });
+            });
+
+            // Mobile Menu
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            if (mobileBtn) {
+                mobileBtn.addEventListener('click', () => {
+                    alert('📱 Menyu: Xizmatlar | Portfolio | Narxlar | Bog\'lanish\n\nStatikSayt.uz');
+                });
+            }
+
+            // Fade animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+            document.querySelectorAll('.service-card, .portfolio-card, .pricing-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        })();
+
+        // ===== BUYURTMA FUNKSIYALARI (AVTOMATIK MATN BILAN) =====
+        const TELEGRAM_USERNAME = 'Musoxon2002';
+        
+        // Portfolio'dan buyurtma
+        function orderPortfolio(projectName, projectType, price) {
+            const message = `📱 Yangi buyurtma!%0A%0A` +
+                           `🏷️ Loyiha: ${projectName}%0A` +
+                           `📂 Turi: ${projectType}%0A` +
+                           `💰 Narx: ${price} so'm%0A%0A` +
+                           `👤 Mijoz buyurtma bermoqchi. Iltimos, bog'laning!`;
+            
+            window.open(`https://t.me/${TELEGRAM_USERNAME}?text=${message}`, '_blank');
+        }
+        
+        // Pricing'dan buyurtma
+        function orderPricing(packageName, price) {
+            const message = `📱 Yangi buyurtma!%0A%0A` +
+                           `📦 Paket: ${packageName}%0A` +
+                           `💰 Narx: ${price} so'm%0A%0A` +
+                           `👤 Mijoz ushbu paketni tanladi. Iltimos, bog'laning!`;
+            
+            window.open(`https://t.me/${TELEGRAM_USERNAME}?text=${message}`, '_blank');
+        }
+        
+        // Umumiy buyurtma/aloqa
+        function orderGeneral() {
+            const message = `📱 Yangi murojaat!%0A%0A` +
+                           `👤 Mijoz sayt orqali bog'lanmoqchi.%0A` +
+                           `💬 Bepul konsultatsiya so'rayapti.%0A%0A` +
+                           `Iltimos, tez orada javob bering!`;
+            
+            window.open(`https://t.me/${TELEGRAM_USERNAME}?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>
