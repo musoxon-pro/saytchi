@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>PowerFit | Fitness Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+        
+        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 20px 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(10px); }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 28px; font-weight: 900; color: #ff4d4d; letter-spacing: 2px; }
+        .logo span { color: #fff; }
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { color: #ccc; text-decoration: none; font-weight: 500; }
+        .nav-links a:hover { color: #ff4d4d; }
+        .header-btn { background: #ff4d4d; color: #fff; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 600; }
+        
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 100px 0 60px; background: linear-gradient(rgba(10,10,10,0.7), rgba(10,10,10,0.9)), url('https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover; }
+        .hero-content { max-width: 700px; }
+        .hero-badge { display: inline-block; background: #ff4d4d; padding: 8px 20px; border-radius: 50px; margin-bottom: 24px; font-weight: 600; }
+        .hero h1 { font-size: 64px; font-weight: 900; line-height: 1.1; margin-bottom: 24px; text-transform: uppercase; }
+        .hero h1 span { color: #ff4d4d; }
+        .hero p { font-size: 18px; color: #aaa; margin-bottom: 36px; }
+        .hero-buttons { display: flex; gap: 16px; }
+        .btn-primary { background: #ff4d4d; color: #fff; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 18px; }
+        .btn-secondary { background: transparent; color: #fff; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 18px; border: 1px solid #ff4d4d; }
+        
+        .stats { padding: 80px 0; background: #111; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
+        .stat-item h3 { font-size: 48px; color: #ff4d4d; font-weight: 900; }
+        
+        .classes { padding: 80px 0; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 42px; font-weight: 900; text-transform: uppercase; }
+        .section-title h2 span { color: #ff4d4d; }
+        .classes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .class-card { background: #111; border-radius: 20px; padding: 30px; text-align: center; border: 1px solid #222; transition: all 0.3s; }
+        .class-card:hover { border-color: #ff4d4d; transform: translateY(-10px); }
+        .class-card i { font-size: 40px; color: #ff4d4d; margin-bottom: 20px; }
+        
+        .pricing { padding: 80px 0; background: #111; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .pricing-card { background: #1a1a1a; border-radius: 20px; padding: 40px 30px; text-align: center; border: 1px solid #333; }
+        .pricing-card.featured { border-color: #ff4d4d; background: #1f1f1f; }
+        .pricing-card h3 { font-size: 24px; margin-bottom: 20px; }
+        .price { font-size: 48px; font-weight: 900; color: #ff4d4d; margin-bottom: 30px; }
+        .price span { font-size: 16px; color: #888; }
+        .pricing-btn { display: inline-block; background: #ff4d4d; color: #fff; padding: 14px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 20px; }
+        
+        .cta { padding: 80px 0; }
+        .cta-box { background: linear-gradient(135deg, #ff4d4d, #cc0000); border-radius: 40px; padding: 60px; text-align: center; }
+        .cta-box h2 { font-size: 42px; font-weight: 900; margin-bottom: 20px; }
+        .cta-btn { display: inline-block; background: #fff; color: #ff4d4d; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 18px; margin-top: 30px; }
+        
+        footer { padding: 30px 0; text-align: center; color: #666; border-top: 1px solid #222; }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 42px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .classes-grid { grid-template-columns: 1fr 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">POWER<span>FIT</span></div>
+                <div class="nav-links">
+                    <a href="#home">Bosh sahifa</a>
+                    <a href="#classes">Mashg'ulotlar</a>
+                    <a href="#pricing">Narxlar</a>
+                    <a href="#contact">Aloqa</a>
+                </div>
+                <a href="#contact" class="header-btn">A'zo bo'lish</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge"><i class="fas fa-fire"></i> 1-HAFTA BEPUL</div>
+                <h1>O'z <span>chegarangizni</span> yengib o'ting</h1>
+                <p>Toshkentdagi eng zamonaviy fitness klub. 50+ trenajyor, 12 professional trener.</p>
+                <div class="hero-buttons">
+                    <a href="#pricing" class="btn-primary">A'zo bo'lish</a>
+                    <a href="#classes" class="btn-secondary">Mashg'ulotlar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item"><h3>50+</h3><p>Trenajyor</p></div>
+                <div class="stat-item"><h3>12</h3><p>Trener</p></div>
+                <div class="stat-item"><h3>800+</h3><p>A'zo</p></div>
+                <div class="stat-item"><h3>24/7</h3><p>Ish vaqti</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="classes" id="classes">
+        <div class="container">
+            <div class="section-title">
+                <h2>Bizning <span>mashg'ulotlar</span></h2>
+            </div>
+            <div class="classes-grid">
+                <div class="class-card"><i class="fas fa-dumbbell"></i><h3>Gym</h3><p>Kuch mashqlari</p></div>
+                <div class="class-card"><i class="fas fa-heart"></i><h3>Cardio</h3><p>Yurak mashqlari</p></div>
+                <div class="class-card"><i class="fas fa-users"></i><h3>Yoga</h3><p>Moslashuvchanlik</p></div>
+                <div class="class-card"><i class="fas fa-swimmer"></i><h3>Pool</h3><p>Suzish havzasi</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Narx <span>paketlari</span></h2>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card"><h3>Kunlik</h3><div class="price">50 000<span>so'm</span></div><a href="#" class="pricing-btn">Tanlash</a></div>
+                <div class="pricing-card featured"><h3>Oylik</h3><div class="price">350 000<span>so'm</span></div><a href="#" class="pricing-btn">Tanlash</a></div>
+                <div class="pricing-card"><h3>Yillik</h3><div class="price">2 900 000<span>so'm</span></div><a href="#" class="pricing-btn">Tanlash</a></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="contact">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Birinchi mashg'ulot bepul!</h2>
+                <p>Hoziroq ro'yxatdan o'ting va o'zgarishni boshlang</p>
+                <a href="#" class="cta-btn"><i class="fab fa-telegram"></i> Telegram orqali bog'lanish</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 PowerFit Fitness Club. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+</body>
+</html>
